@@ -41,12 +41,17 @@ public final strictfp class BlockInModule extends EvidenceModule {
    private int idleTicks;
    private int attempts;
    private int observationTicks;
-   private float observedManualYaw;
-   private float observedManualPitch;
+   private long observedMouseInput;
 
    public BlockInModule(ModuleManager modules) {
       super("blockin", "Block In", ModuleCategory.UTILITY);
       this.modules = modules;
+   }
+
+   @Override
+   public boolean canToggleFromGui() {
+      // Permit an explicit GUI start; retain bind-only metadata so profiles never auto-start placement.
+      return true;
    }
 
    @Override
@@ -65,10 +70,12 @@ public final strictfp class BlockInModule extends EvidenceModule {
       if (this.stopped || !this.modules.requestedEnabled(this)) {
          return false;
       }
-      if (!ItemActionHelper.ready(c)) {
+      if (!c.ready() || c.minecraft().playerController == null || !c.player().isEntityAlive() || c.player().isSpectator()) {
          this.stop();
          return false;
       }
+      // A GUI start waits for the normal game focus handoff instead of disabling itself immediately.
+      if (!ItemActionHelper.ready(c)) return false;
       if (this.player == null) {
          this.player = c.player();
          this.world = c.world();
@@ -106,13 +113,9 @@ public final strictfp class BlockInModule extends EvidenceModule {
    }
 
    private boolean cameraInput() {
-      // Observe, but never clear, the shared manual-angle accumulator. A user
-      // turn takes precedence over our next visible aiming step.
-      float yaw = RotationService.manualYaw();
-      float pitch = RotationService.manualPitch();
-      boolean changed = Float.compare(yaw, this.observedManualYaw) != 0 || Float.compare(pitch, this.observedManualPitch) != 0;
-      this.observedManualYaw = yaw;
-      this.observedManualPitch = pitch;
+      long revision = RotationService.mouseInputRevision();
+      boolean changed = revision != this.observedMouseInput;
+      this.observedMouseInput = revision;
       return changed;
    }
 
@@ -267,8 +270,7 @@ public final strictfp class BlockInModule extends EvidenceModule {
       this.slotAtTickStart = -1;
       this.lastPlanTick = this.lastActionTick = this.plannedTick = Integer.MIN_VALUE;
       this.elapsedTicks = this.idleTicks = this.attempts = this.observationTicks = 0;
-      this.observedManualYaw = RotationService.manualYaw();
-      this.observedManualPitch = RotationService.manualPitch();
+      this.observedMouseInput = RotationService.mouseInputRevision();
    }
 
    @Override

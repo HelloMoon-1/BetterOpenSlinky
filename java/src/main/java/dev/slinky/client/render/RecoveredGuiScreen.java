@@ -27,6 +27,7 @@ public final class RecoveredGuiScreen extends GuiScreen implements RenderHooks.G
    private final ProfileServices.Host profiles;
    private List<ProfileServices.Record> profileRows = Collections.emptyList();
    private float profileHeight;
+   private String profileError;
    private final Object newProfile = new Object();
    private final Object hexEdit = new Object();
    private final Map<Module, Float> heights = new IdentityHashMap<>();
@@ -326,7 +327,7 @@ public final class RecoveredGuiScreen extends GuiScreen implements RenderHooks.G
                }
             }
 
-            if ((flags & 2) == 0) {
+            if (entry.canToggleFromGui()) {
                RenderMath.Rect toggle = new RenderMath.Rect(title.x + title.width + c(1313292), title.y, c(1313296), title.height);
                RecoveredGui.Toggle animation = this.toggles.get(entry);
                if (animation == null) {
@@ -407,6 +408,7 @@ public final class RecoveredGuiScreen extends GuiScreen implements RenderHooks.G
    }
 
    private void error(IOException error) {
+      this.profileError = error.getMessage() == null ? "Profile operation failed" : error.getMessage();
       SemanticEvent event = new SemanticEvent(12);
       RenderEventPayload payload = RenderEventPayload.attach(event);
       payload.errorCode = error instanceof ProfileServices.Failure ? ((ProfileServices.Failure)error).code : 1;
@@ -431,6 +433,7 @@ public final class RecoveredGuiScreen extends GuiScreen implements RenderHooks.G
             this.profiles.delete(name);
          }
 
+         this.profileError = null;
          this.actionEvent(action, name);
       } catch (IOException var5) {
          this.error(var5);
@@ -453,6 +456,20 @@ public final class RecoveredGuiScreen extends GuiScreen implements RenderHooks.G
       }
    }
 
+   private static String fitProfileText(String text, float width, float font) {
+      if (width <= 0) return "";
+      if (CanvasFonts.width(text, 0, font) <= width) return text;
+      String suffix = "...";
+      if (CanvasFonts.width(suffix, 0, font) > width) return "";
+      int end = text.length();
+      while (end > 0) {
+         end = text.offsetByCodePoints(end, -1);
+         String candidate = text.substring(0, end) + suffix;
+         if (CanvasFonts.width(candidate, 0, font) <= width) return candidate;
+      }
+      return suffix;
+   }
+
    private void renderProfiles(DrawPlan plan, RecoveredGui.Layout layout, double now, float width, float height) {
       if (this.state.mode == 0 && now > this.state.profileStamp + d(1313048)) {
          try {
@@ -465,6 +482,11 @@ public final class RecoveredGuiScreen extends GuiScreen implements RenderHooks.G
          this.state.profileStamp = now;
       }
 
+      if (this.profileError != null) {
+         layout.columns(1);
+         RenderMath.Rect notice = layout.next(24.0F);
+         this.presentation.text(plan, fitProfileText(this.profileError, notice.width, 14.0F), notice, 0, 0, 14.0F, 0xFFFF7777);
+      }
       layout.autoColumns(c(1313056));
       float radius = c(1313064);
       float font = c(1313068);
@@ -478,7 +500,11 @@ public final class RecoveredGuiScreen extends GuiScreen implements RenderHooks.G
             this.clip(plan, inside);
             inside.columns(1);
             RenderMath.Rect head = inside.next(radius);
-            float advance = this.presentation.text(plan, record == null ? RenderConstants.text(1313482) : record.name, head, 0, 0, font, this.gray(1313072));
+            String name = record == null ? RenderConstants.text(1313482) : record.name;
+            boolean active = record == null ? this.profiles.current() == null : record.name.equals(this.profiles.current());
+            if (active) name = "[Active] " + name;
+            this.presentation.text(plan, fitProfileText(name, head.width, font), head, 0, 0, font, this.gray(1313072));
+            RenderMath.Rect bindingRow = inside.next(20.0F);
             if (record != null) {
                GuiPresentation.Binding binding = this.profileBindings.get(record.name);
                if (binding == null) {
@@ -499,14 +525,19 @@ public final class RecoveredGuiScreen extends GuiScreen implements RenderHooks.G
                      this.state,
                      plan,
                      binding,
-                     new RenderMath.Rect(advance + c(1313076), head.y, head.width - advance + head.x, head.height),
+                     bindingRow,
                      new float[]{accent.red, accent.green, accent.blue, 1.0F},
                      false
                   );
             }
 
+            // Reserve an independent action row: long filenames/key labels must not consume Load clicks.
+            RenderMath.Rect actions = inside.next(20.0F);
+            float cell = actions.width / 4.0F;
+            float buttonSize = Math.min(20.0F, cell);
             for (int slot = 0; slot < 4; slot++) {
-               RenderMath.Rect button = new RenderMath.Rect(head.x + head.width - (float)(80 - 20 * slot) - (float)(36 - 12 * slot), head.y, radius, 20.0F);
+               RenderMath.Rect button = new RenderMath.Rect(actions.x + slot * cell + (cell - buttonSize) * 0.5F,
+                  actions.y + (actions.height - buttonSize) * 0.5F, buttonSize, buttonSize);
                boolean enabled = (slot & (record == null ? 1 : 0)) == 0;
                int at = 1313492 + RenderConstants.i(1313492 + slot * 4);
                String label = RenderConstants.text(at);

@@ -29,7 +29,7 @@ public final class RecoveredConfiguration {
          if (included(module, scope)) {
             JsonObject record = new JsonObject();
             int flags = module.descriptorFlags();
-            if ((flags & 2) == 0 && module.isEnabled()) {
+            if ((flags & 2) == 0 && manager.requestedEnabled(module)) {
                record.addProperty("__on", true);
             }
 
@@ -116,6 +116,49 @@ public final class RecoveredConfiguration {
    }
 
    public static void apply(ModuleManager manager, JsonObject root, RecoveredConfiguration.Scope scope) {
+      List<Runnable> settings = new ArrayList<>();
+      List<Runnable> bindings = new ArrayList<>();
+      List<Runnable> states = new ArrayList<>();
+      for (Module module : manager.all()) {
+         if (!included(module, scope)) continue;
+         for (Setting<?> setting : module.getSettings()) settings.add(restoreSetting(setting));
+         int key = module.getBinding();
+         boolean hold = module.isHoldBinding();
+         boolean enabled = manager.requestedEnabled(module);
+         bindings.add(() -> {
+            module.setHoldBinding(hold);
+            manager.setBinding(module, key);
+         });
+         states.add(() -> manager.requestEnabled(module, enabled));
+      }
+      try {
+         applyUnchecked(manager, root, scope);
+      } catch (RuntimeException failure) {
+         // No lifecycle batch is applied here. Restore values before restoring queued enable requests.
+         restoreAll(settings, failure);
+         restoreAll(bindings, failure);
+         restoreAll(states, failure);
+         throw failure;
+      }
+   }
+
+   private static <T> Runnable restoreSetting(Setting<T> setting) {
+      T value = setting.get();
+      boolean configured = setting.isConfigured();
+      return () -> {
+         setting.set(value);
+         if (!configured) setting.markUnconfigured();
+      };
+   }
+
+   private static void restoreAll(List<Runnable> restorations, RuntimeException failure) {
+      for (Runnable restore : restorations) {
+         try { restore.run(); }
+         catch (RuntimeException rollbackFailure) { failure.addSuppressed(rollbackFailure); }
+      }
+   }
+
+   private static void applyUnchecked(ModuleManager manager, JsonObject root, RecoveredConfiguration.Scope scope) {
       for (Module module : manager.all()) {
          if (included(module, scope)) {
             JsonElement node = root.get(module.getName());
@@ -144,19 +187,7 @@ public final class RecoveredConfiguration {
    }
 
    public static void resetProfile(ModuleManager manager) {
-      for (Module module : manager.all()) {
-         if (included(module, RecoveredConfiguration.Scope.PROFILE)) {
-            manager.setBinding(module, 0);
-            module.setHoldBinding(false);
-            if ((module.descriptorFlags() & 2) == 0) {
-               manager.requestEnabled(module, false);
-            }
-
-            for (Setting<?> setting : module.getSettings()) {
-               setting.restoreSaved();
-            }
-         }
-      }
+      apply(manager, new JsonObject(), RecoveredConfiguration.Scope.PROFILE);
    }
 
    public static final class ProfileBinding {

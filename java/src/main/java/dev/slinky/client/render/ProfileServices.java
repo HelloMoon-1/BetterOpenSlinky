@@ -182,7 +182,11 @@ public final class ProfileServices {
       @Override
       public void load(String name) throws IOException {
          if (name == null) {
-            RecoveredConfiguration.resetProfile(this.manager);
+            try {
+               RecoveredConfiguration.resetProfile(this.manager);
+            } catch (RuntimeException failure) {
+               throw new ProfileServices.Failure(5001, "Could not reset profile: " + failure.getMessage());
+            }
          } else {
             ensure(this.directory.getParent());
             ensure(this.directory);

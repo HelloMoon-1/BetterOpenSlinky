@@ -18,6 +18,7 @@ public final strictfp class RotationService {
    private static float pendingPitch;
    private static float manualYaw;
    private static float manualPitch;
+   private static long mouseInputRevision;
    private static float cameraYaw;
    private static float cameraPitch;
    private static float retainedYaw;
@@ -156,7 +157,12 @@ public final strictfp class RotationService {
       manualPitch += pitch;
    }
 
+   public static strictfp long mouseInputRevision() { return mouseInputRevision; }
+
    public static strictfp boolean mouseAngles(Entity entity, ClientContext context, float yaw, float pitch) {
+      // This hook observes vanilla mouse input, not our direct visible rotation writes.
+      // Unlike the aim-assist accumulator it is never cleared by another module.
+      if (Float.isFinite(yaw) && Float.isFinite(pitch) && (yaw != 0.0F || pitch != 0.0F)) mouseInputRevision++;
       return false;
    }
 

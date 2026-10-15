@@ -908,7 +908,7 @@ public final class OpenB4GuiScreen extends GuiScreen implements RenderHooks.GuiF
             try {
                if (button == 0) {
                   if (this.action != null) this.action.run();
-                  else if (this.mod != OpenB4GuiScreen.this.module && (this.mod.descriptorFlags() & 2) == 0
+                  else if (this.mod != OpenB4GuiScreen.this.module && this.mod.canToggleFromGui()
                      && !"raven_settings".equals(this.mod.getId())) OpenB4GuiScreen.this.manager.toggle(this.mod);
                   return true;
                }

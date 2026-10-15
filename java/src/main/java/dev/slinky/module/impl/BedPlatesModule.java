@@ -17,12 +17,14 @@ public final class BedPlatesModule extends Module {
    private final BooleanSetting showDistance;
    private final NumberSetting range;
    private final NumberSetting scale;
+   private final NumberSetting backgroundOpacity;
 
    public BedPlatesModule() {
       super("bed_plates", "Bed Plates", "Shows the actual defense blocks surrounding loaded beds.", ModuleCategory.RENDER);
       this.showDistance = this.option(new BooleanSetting("show_distance", "Show distance", true));
       this.range = this.option(new NumberSetting("range", "Range", 100.0, 16.0, 100.0, 1.0));
       this.scale = this.option(new NumberSetting("scale", "Scale", 2.0, 0.5, 4.0, 0.1));
+      this.backgroundOpacity = this.option(new NumberSetting("background_opacity", "Background opacity", 93.0, 0.0, 100.0, 1.0));
    }
 
    private <T, S extends Setting<T>> S option(S setting) {
@@ -45,7 +47,7 @@ public final class BedPlatesModule extends Module {
       RenderAccess.Frame frame = RenderAccess.frame(c, event);
       if (frame != null) {
          RenderAccess.submit(event, BedPlatesRenderer.plan(c, frame, this.beds.beds(),
-            this.showDistance.isEnabled(), this.scale.floatValue(), this.range.doubleValue()));
+            this.showDistance.isEnabled(), this.scale.floatValue(), this.range.doubleValue(), this.backgroundOpacity.floatValue() / 100.0F));
       }
    }
 

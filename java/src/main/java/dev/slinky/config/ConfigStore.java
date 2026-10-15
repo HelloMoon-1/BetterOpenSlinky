@@ -89,11 +89,37 @@ public final class ConfigStore {
    }
 
    public synchronized void loadProfile(ModuleManager manager) throws IOException {
-      try {
-         RecoveredConfiguration.apply(manager, read(this.path), RecoveredConfiguration.Scope.PROFILE);
-      } catch (RuntimeException var3) {
-         throw new IOException("Could not apply profile", var3);
+      JsonObject root = profileRecords(manager, read(this.path));
+      if (!RecoveredConfiguration.hasRecords(manager, root, RecoveredConfiguration.Scope.PROFILE)) {
+         throw new IOException("No recognized module records in this profile");
       }
+      try {
+         RecoveredConfiguration.apply(manager, root, RecoveredConfiguration.Scope.PROFILE);
+      } catch (RuntimeException failure) {
+         throw new IOException("Could not apply profile: " + failure.getMessage(), failure);
+      }
+   }
+
+   private static JsonObject profileRecords(ModuleManager manager, JsonObject root) {
+      JsonObject container = object(root, "modules");
+      if (container == null) container = root;
+      JsonObject result = new JsonObject();
+      for (Module module : manager.all()) {
+         JsonObject record = object(container, module.getName());
+         if (record == null) record = object(container, module.getId());
+         if (record == null) continue;
+         JsonObject settings = object(record, "settings");
+         JsonObject normalized = new JsonObject();
+         for (java.util.Map.Entry<String, JsonElement> entry : (settings == null ? record : settings).entrySet()) {
+            normalized.add(entry.getKey(), entry.getValue());
+         }
+         for (String key : new String[]{"__bind", "__hold", "__on"}) {
+            if (record.has(key)) normalized.add(key, record.get(key));
+         }
+         if (!record.has("__on") && record.has("enabled")) normalized.add("__on", record.get("enabled"));
+         result.add(module.getName(), normalized);
+      }
+      return result;
    }
 
    public static int importText(ModuleManager manager, byte[] text) throws IOException {
@@ -131,6 +157,7 @@ public final class ConfigStore {
       if (parent != null && parent.getParent() != null) {
          ensure(parent.getParent());
       }
+      if (parent != null) ensure(parent);
 
       writeBytes(
          this.path, ConfigurationJson.print(RecoveredConfiguration.serialize(manager, RecoveredConfiguration.Scope.PROFILE, Collections.emptyList())), replace

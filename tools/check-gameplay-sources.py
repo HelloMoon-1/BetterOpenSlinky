@@ -191,6 +191,13 @@ def check_hud_contracts(src):
             r"System\.nanoTime\(\) % 4000000000L", r"Math\.cos\(phase - row \* 0\.42\)",
             r"FONT = 12\.5F", r"ROW = 15\.5F",
         ],
+        "module/impl/NotificationsModule.java": [
+            r'this\.defaultOn\("show_combat", true\)', r'this\.defaultOn\("show_utility", true\)',
+            r'this\.defaultOn\("hide_hold_notifs", true\)', r'this\.defaultOn\("hide_bind_only", true\)',
+            r'this\.defaultOn\("hide_ingame", false\)',
+            r"setting\.parseAndSet\(Boolean\.toString\(value\)\)",
+            r"setting\.saveCurrent\(\)",
+        ],
         "module/impl/ModOverlayModule.java": [
             r'new BooleanSetting\("screenshot_lowercase", "Drip Lite lowercase", false\)',
             r'new ChoiceSetting\("hud_style", "Style", 1, "Raven", "Drip Lite"\)',
@@ -202,6 +209,8 @@ def check_hud_contracts(src):
             r"CanvasFonts\.guiFace\(1\.0F\)", r"DISTANCE_SIZE = 16\.0F", r"p\.canvasText\(plate\.label.*DISTANCE_SIZE",
             r"scale \*= projectionZoom\(frame\.projection, c\.minecraft\(\)\.gameSettings\.fovSetting\)",
             r"Math\.abs\(projection\[5\]\) \* Math\.tan\(Math\.toRadians\(configuredFov\) \* 0\.5\)",
+            r"if \(backgroundOpacity > 0\.0F\)", r"0\.23F \* backgroundOpacity",
+            r"scale, range, 0\.93F\)",
         ],
         "client/render/BedPlatesWorld.java": [
             r"CELLS_PER_TICK = 8192", r"SECTION_VISITS_PER_TICK = 32",
@@ -237,10 +246,41 @@ def check_hud_contracts(src):
             r"mouseHelper\.grabMouseCursor\(\)",
         ],
         "client/render/NotificationRenderer.java": [r"CanvasFonts\.guiFace\(1\.0F\)"],
+        "module/Module.java": [
+            r"if \(setting\.isConfigured\(\)\) setting\.saveCurrent\(\);\s*this\.settings\.add\(setting\)",
+            r"boolean canToggleFromGui\(\)",
+        ],
+        "config/ConfigStore.java": [
+            r"profileRecords\(manager, read\(this\.path\)\)", r"hasRecords\(manager, root, RecoveredConfiguration\.Scope\.PROFILE\)",
+            r'object\(root, "modules"\)', r'object\(container, module\.getId\(\)\)', r'object\(record, "settings"\)',
+            r'normalized\.add\("__on", record\.get\("enabled"\)\)', r"if \(parent != null\) ensure\(parent\)",
+        ],
+        "config/RecoveredConfiguration.java": [
+            r"manager\.requestedEnabled\(module\)", r"settings\.add\(restoreSetting\(setting\)\)",
+            r"restoreAll\(settings, failure\);\s*restoreAll\(bindings, failure\);\s*restoreAll\(states, failure\)",
+            r"if \(!configured\) setting\.markUnconfigured\(\)", r"failure\.addSuppressed\(rollbackFailure\)",
+            r"apply\(manager, new JsonObject\(\), RecoveredConfiguration\.Scope\.PROFILE\)",
+        ],
+        "client/render/ProfileServices.java": [r"Could not reset profile:", r"configurationSession\(\)\.profileApplied\(name\)"],
+        "client/render/RecoveredGuiScreen.java": [
+            r"entry\.canToggleFromGui\(\)", r"bindingRow = inside\.next\(20\.0F\)",
+            r"actions = inside\.next\(20\.0F\)", r"this\.profileError = error\.getMessage\(\)", r"\[Active\]",
+        ],
+        "module/impl/BedPlatesModule.java": [
+            r'new NumberSetting\("background_opacity", "Background opacity", 93\.0, 0\.0, 100\.0, 1\.0\)',
+            r"this\.backgroundOpacity\.floatValue\(\) / 100\.0F",
+        ],
+        "module/impl/BlockInModule.java": [
+            r"boolean canToggleFromGui\(\)\s*\{[^}]*return true;", r"if \(!ItemActionHelper\.ready\(c\)\) return false",
+            r"long revision = RotationService\.mouseInputRevision\(\)", r"this\.observedMouseInput = revision",
+            r"ItemActionHelper\.useBlock\(c, this, hit\)",
+        ],
+        "client/rotation/RotationService.java": [r"mouseInputRevision\+\+", r"long mouseInputRevision\(\)"],
         "config/SettingCodec.java": [
             r'"hud_style"\.equals\(choice\.getKey\(\)\) && "Screenshot"\.equals\(label\)',
             r'choice\.getOptions\(\)\.contains\("Drip Lite"\)\) label = "Drip Lite"',
             r"choice\.getOptions\(\)\.get\(index\)\.equals\(label\)",
+            r"Double\.isFinite\(number\) && number == index && index >= 0 && index < choice\.getOptions\(\)\.size\(\)",
         ],
     }
     errors = []

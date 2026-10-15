@@ -16,13 +16,19 @@ public final class BedPlatesRenderer {
 
    public static DrawPlan plan(ClientContext c, RenderAccess.Frame frame,
       List<BedPlatesWorld.Bed> beds, boolean showDistance, float scale, double range) {
+      return plan(c, frame, beds, showDistance, scale, range, 0.93F);
+   }
+
+   public static DrawPlan plan(ClientContext c, RenderAccess.Frame frame,
+      List<BedPlatesWorld.Bed> beds, boolean showDistance, float scale, double range, float backgroundOpacity) {
       try (CanvasFonts.GuiFaceScope face = CanvasFonts.guiFace(1.0F)) {
-         return planWithFace(c, frame, beds, showDistance, scale, range);
+         float opacity = Float.isFinite(backgroundOpacity) ? Math.max(0.0F, Math.min(1.0F, backgroundOpacity)) : 0.93F;
+         return planWithFace(c, frame, beds, showDistance, scale, range, opacity);
       }
    }
 
    private static DrawPlan planWithFace(ClientContext c, RenderAccess.Frame frame,
-      List<BedPlatesWorld.Bed> beds, boolean showDistance, float scale, double range) {
+      List<BedPlatesWorld.Bed> beds, boolean showDistance, float scale, double range, float backgroundOpacity) {
       DrawPlan p = new DrawPlan().canvas();
       if (!c.ready() || frame == null || !Float.isFinite(frame.width) || !Float.isFinite(frame.height)
          || frame.width <= 0.0F || frame.height <= 0.0F || !Float.isFinite(scale) || scale <= 0.0F
@@ -51,7 +57,7 @@ public final class BedPlatesRenderer {
             || right <= 0.0F || left >= frame.width || bottom <= 0.0F || top >= frame.height) continue;
          // Reserve only visible pixels, including the halo and a small AA margin. An offscreen
          // portion must not suppress an unrelated on-screen plate. Partial edge plates remain anchored.
-         float padding = HALO * scale + 1.0F;
+         float padding = (backgroundOpacity > 0.0F ? HALO * scale : 0.0F) + 1.0F;
          Plate candidate = new Plate(bed, label, projected.x, projected.y, width, height,
             Math.max(0.0F, left - padding), Math.max(0.0F, top - padding),
             Math.min(frame.width, right + padding), Math.min(frame.height, bottom + padding));
@@ -72,15 +78,17 @@ public final class BedPlatesRenderer {
          List<ItemStack> items = plate.bed.items();
          p.push().translate(plate.x, plate.y, 0.0F).scale(scale, scale, 1.0F);
          float x = -plate.width * 0.5F, y = -plate.height;
-         // Layered neutral halo: inexpensive soft falloff, no framebuffer/shader dependency.
-         for (int spread = (int)HALO; spread >= 1; spread -= 2) {
-            float alpha = 0.04F + (HALO - spread) * 0.012F;
-            p.color(0.02F, 0.02F, 0.025F, alpha).rect(x - spread, y - spread,
-               plate.width + spread * 2.0F, plate.height + spread * 2.0F, 6.0F + spread);
+         if (backgroundOpacity > 0.0F) {
+            // Fade the surface, border and shadow together; text/items stay fully readable.
+            for (int spread = (int)HALO; spread >= 1; spread -= 2) {
+               float alpha = (0.04F + (HALO - spread) * 0.012F) * backgroundOpacity;
+               p.color(0.02F, 0.02F, 0.025F, alpha).rect(x - spread, y - spread,
+                  plate.width + spread * 2.0F, plate.height + spread * 2.0F, 6.0F + spread);
+            }
+            p.color(0.12F, 0.12F, 0.13F, backgroundOpacity).rect(x, y, plate.width, plate.height, 6.0F);
+            p.color(0.58F, 0.58F, 0.60F, 0.23F * backgroundOpacity).lineWidth(0.7F).roundedStroke(x + 0.4F, y + 0.4F,
+               plate.width - 0.8F, plate.height - 0.8F, 5.6F);
          }
-         p.color(0.12F, 0.12F, 0.13F, 0.93F).rect(x, y, plate.width, plate.height, 6.0F);
-         p.color(0.58F, 0.58F, 0.60F, 0.23F).lineWidth(0.7F).roundedStroke(x + 0.4F, y + 0.4F,
-            plate.width - 0.8F, plate.height - 0.8F, 5.6F);
          if (showDistance) {
             p.canvasText(plate.label, 0.0F, y + 12.0F, 0xFFF2F2F5, DISTANCE_SIZE, 18, SmoothHudStyle.FONT_STYLE);
          }

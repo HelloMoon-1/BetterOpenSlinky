@@ -31,6 +31,8 @@ public abstract class Module {
          }
       }
 
+      // Constructor-configured options also need a baseline when older profiles omit them.
+      if (setting.isConfigured()) setting.saveCurrent();
       this.settings.add(setting);
       return setting;
    }
@@ -72,6 +74,10 @@ public abstract class Module {
 
    public int descriptorFlags() {
       return EvidenceCatalog.descriptorFlags(this.name);
+   }
+
+   public boolean canToggleFromGui() {
+      return (this.descriptorFlags() & 2) == 0;
    }
 
    public String statusText() {

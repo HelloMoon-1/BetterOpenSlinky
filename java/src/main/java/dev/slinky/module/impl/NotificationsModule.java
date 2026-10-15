@@ -13,6 +13,7 @@ import dev.slinky.module.EvidenceModule;
 import dev.slinky.module.Module;
 import dev.slinky.module.ModuleCategory;
 import dev.slinky.module.ModuleManager;
+import dev.slinky.setting.Setting;
 import java.util.Locale;
 
 public final strictfp class NotificationsModule extends EvidenceModule {
@@ -23,6 +24,24 @@ public final strictfp class NotificationsModule extends EvidenceModule {
    public NotificationsModule(ModuleManager manager) {
       super("notifications", "Notifications", ModuleCategory.RENDER);
       this.manager = manager;
+      // Recovered booleans all start disabled, which would leave the HUD silent even when the
+      // module is on. Restore the captured startup state instead of an empty category filter.
+      this.defaultOn("show_combat", true);
+      this.defaultOn("show_move", true);
+      this.defaultOn("show_block", true);
+      this.defaultOn("show_visual", true);
+      this.defaultOn("show_utility", true);
+      this.defaultOn("hide_hold_notifs", true);
+      this.defaultOn("hide_bind_only", true);
+      this.defaultOn("hide_ingame", false);
+   }
+
+   /** Applies a captured startup value once, and keeps it as the profile fallback baseline. */
+   private void defaultOn(String key, boolean value) {
+      Setting<?> setting = this.findSetting(key);
+      if (setting.isConfigured()) return;
+      setting.parseAndSet(Boolean.toString(value));
+      setting.saveCurrent();
    }
 
    @Override

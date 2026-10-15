@@ -110,8 +110,12 @@ public final class SettingCodec {
             ((StringListSetting)setting).set(list);
          }
       } else {
-         if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isString()) {
-            ChoiceSetting choice = (ChoiceSetting)setting;
+         ChoiceSetting choice = (ChoiceSetting)setting;
+         if (numeric(value)) {
+            double number = value.getAsDouble();
+            int index = (int)number;
+            if (Double.isFinite(number) && number == index && index >= 0 && index < choice.getOptions().size()) choice.set(index);
+         } else if (value.isJsonPrimitive() && value.getAsJsonPrimitive().isString()) {
             String label = value.getAsString();
             // Profiles store labels, not indices. Keep the former HUD style readable after renaming.
             if ("hud_style".equals(choice.getKey()) && "Screenshot".equals(label)
