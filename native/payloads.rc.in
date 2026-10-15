@@ -1,0 +1,4 @@
+#include <windows.h>
+101 RCDATA "@PAYLOAD_DIR_RC@/payload-101.jar"
+102 RCDATA "@PAYLOAD_DIR_RC@/payload-102.jar"
+103 RCDATA "@PAYLOAD_DIR_RC@/payload-103.jar"

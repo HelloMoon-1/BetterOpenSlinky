@@ -1,0 +1,557 @@
+[
+  {
+    "name": "AutoBlock",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "AutoClicker",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "AimAssist",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "AntiKnockback",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "Backtrack",
+    "category": "network",
+    "lite": true
+  },
+  {
+    "name": "ClickAssist",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "Displace",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "Hitbox",
+    "category": "combat",
+    "lite": false
+  },
+  {
+    "name": "Hit Select",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "Jump Reset",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "KillAura",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "Reach",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "Reduce",
+    "category": "combat",
+    "lite": false
+  },
+  {
+    "name": "TPAura",
+    "category": "combat",
+    "lite": false
+  },
+  {
+    "name": "Velocity",
+    "category": "combat",
+    "lite": false
+  },
+  {
+    "name": "WTap",
+    "category": "combat",
+    "lite": true
+  },
+  {
+    "name": "Bhop",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "Boost",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "Dolphin",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "Fly",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "InvMove",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "KeepSprint",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "Long Jump",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "NoSlow",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "Speed",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "Sprint",
+    "category": "movement",
+    "lite": true
+  },
+  {
+    "name": "Stasis",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "Stop Motion",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "TargetStrafe",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "Teleport",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "Timer",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "VClip",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "45 Jump",
+    "category": "movement",
+    "lite": false
+  },
+  {
+    "name": "AntiAFK",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "AntiFireball",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "AutoBlockin",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "AutoJump",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "AutoLadder",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "AutoPlace",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "AutoSwap",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "AutoTool",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "BedAura",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "Delay Remover",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "FastMine",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "FastPlace",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "Freecam",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "GhostHand",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "InvManager",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "NoFall",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "NoRotate",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "SafeWalk",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "Scaffold",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "Tower",
+    "category": "player",
+    "lite": false
+  },
+  {
+    "name": "Water Bucket",
+    "category": "player",
+    "lite": true
+  },
+  {
+    "name": "AntiBot",
+    "category": "world",
+    "lite": true
+  },
+  {
+    "name": "Weather",
+    "category": "world",
+    "lite": true
+  },
+  {
+    "name": "AntiDebuff",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "AntiShuffle",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "BedESP",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "BreakProgress",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "Chams",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "ChestESP",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "Damage Tags",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "Extend Camera",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "Extra Bobbing",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "Fall View",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "HUD",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "Indicators",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "ItemESP",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "MobESP",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "Nametags",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "NoCameraClip",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "NoHurtCam",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "PlayerESP",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "Radar",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "TargetHUD",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "Tracers",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "Trajectories",
+    "category": "render",
+    "lite": true
+  },
+  {
+    "name": "Xray",
+    "category": "render",
+    "lite": false
+  },
+  {
+    "name": "Blink",
+    "category": "network",
+    "lite": false
+  },
+  {
+    "name": "Fake Lag",
+    "category": "network",
+    "lite": false
+  },
+  {
+    "name": "Freeze",
+    "category": "network",
+    "lite": false
+  },
+  {
+    "name": "Lag Range",
+    "category": "network",
+    "lite": true
+  },
+  {
+    "name": "Limbo",
+    "category": "network",
+    "lite": false
+  },
+  {
+    "name": "VPN Status",
+    "category": "network",
+    "lite": false
+  },
+  {
+    "name": "AutoRequeue",
+    "category": "minigames",
+    "lite": false
+  },
+  {
+    "name": "AutoWho",
+    "category": "minigames",
+    "lite": false
+  },
+  {
+    "name": "Bed Wars",
+    "category": "minigames",
+    "lite": true
+  },
+  {
+    "name": "Bridge Info",
+    "category": "minigames",
+    "lite": false
+  },
+  {
+    "name": "Duels Stats",
+    "category": "minigames",
+    "lite": false
+  },
+  {
+    "name": "Murder Mystery",
+    "category": "minigames",
+    "lite": false
+  },
+  {
+    "name": "Sky Wars",
+    "category": "minigames",
+    "lite": true
+  },
+  {
+    "name": "Speed Builders",
+    "category": "minigames",
+    "lite": false
+  },
+  {
+    "name": "Sumo Fences",
+    "category": "minigames",
+    "lite": false
+  },
+  {
+    "name": "AntiCheat",
+    "category": "other",
+    "lite": true
+  },
+  {
+    "name": "Chat Bypass",
+    "category": "other",
+    "lite": false
+  },
+  {
+    "name": "Fake Chat",
+    "category": "other",
+    "lite": false
+  },
+  {
+    "name": "Hit Particles",
+    "category": "other",
+    "lite": false
+  },
+  {
+    "name": "Latency Alerts",
+    "category": "other",
+    "lite": false
+  },
+  {
+    "name": "Name Hider",
+    "category": "other",
+    "lite": true
+  },
+  {
+    "name": "Assistant",
+    "category": "client",
+    "lite": false
+  },
+  {
+    "name": "Command Line",
+    "category": "client",
+    "lite": false
+  },
+  {
+    "name": "Chat Commands",
+    "category": "client",
+    "lite": true
+  },
+  {
+    "name": "IRC",
+    "category": "client",
+    "lite": true
+  },
+  {
+    "name": "Gui",
+    "category": "client",
+    "lite": true
+  },
+  {
+    "name": "Settings",
+    "category": "client",
+    "lite": true
+  },
+  {
+    "name": "Manager",
+    "category": "profiles",
+    "lite": true
+  },
+  {
+    "name": "Manager",
+    "category": "scripts",
+    "lite": true
+  },
+  {
+    "name": "Test",
+    "category": "other",
+    "lite": false
+  },
+  {
+    "name": "View Packets",
+    "category": "other",
+    "lite": false
+  },
+  {
+    "name": "Debug AC",
+    "category": "other",
+    "lite": false
+  }
+]

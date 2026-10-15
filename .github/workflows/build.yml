@@ -1,0 +1,67 @@
+name: Build Slinky
+
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: ${{ matrix.platform }}
+    runs-on: ${{ matrix.runner }}
+    timeout-minutes: 35
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: windows-x64
+            runner: windows-2022
+          - platform: linux-x86_64
+            runner: ubuntu-24.04
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check gameplay and UI source consistency
+        run: python -I tools/check-gameplay-sources.py
+
+      - name: Build Windows Java payloads and native launcher
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: ./build.ps1 -RestoreDependencies -Generator 'Visual Studio 17 2022'
+
+      - name: Build Linux Java payloads and native library
+        if: runner.os == 'Linux'
+        shell: bash
+        run: python3 -I tools/build-linux.py --restore-dependencies
+
+      - name: Package only freshly built files
+        run: python -I tools/package-ci-artifacts.py ${{ matrix.platform }}
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: slinky-${{ matrix.platform }}-${{ github.sha }}
+          path: artifacts/${{ matrix.platform }}/
+          if-no-files-found: error
+          retention-days: 14

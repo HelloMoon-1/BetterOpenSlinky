@@ -1,0 +1,234 @@
+[
+  {
+    "sha1": "3870888a6c3d349d3771a3e9d16c9bf5e076b908",
+    "size": 8461484,
+    "url": "https://launcher.mojang.com/v1/objects/3870888a6c3d349d3771a3e9d16c9bf5e076b908/client.jar",
+    "path": "minecraft-1.8.9-official.jar",
+    "sha256": "14f0d96d1a56fb4f5c3b2233d00699525893fe5ce3dcf181e7de59120595d298"
+  },
+  {
+    "path": "libraries/netty-1.8.8.jar",
+    "sha1": "0a796914d1c8a55b4da9f4a8856dd9623375d8bb",
+    "size": 15966,
+    "url": "https://libraries.minecraft.net/com/mojang/netty/1.8.8/netty-1.8.8.jar",
+    "sha256": "cae3de169e7695ef30079349c5ea81790bd10c04c4037196fd4fdc07b6d43934"
+  },
+  {
+    "path": "libraries/oshi-core-1.1.jar",
+    "sha1": "9ddf7b048a8d701be231c0f4f95fd986198fd2d8",
+    "size": 30973,
+    "url": "https://libraries.minecraft.net/oshi-project/oshi-core/1.1/oshi-core-1.1.jar",
+    "sha256": "27901e5d4d60d3502571d5e6358fc89e3fcf874138b69d495d139bcc3e169404"
+  },
+  {
+    "path": "libraries/jna-3.4.0.jar",
+    "sha1": "803ff252fedbd395baffd43b37341dc4a150a554",
+    "size": 1008730,
+    "url": "https://libraries.minecraft.net/net/java/dev/jna/jna/3.4.0/jna-3.4.0.jar",
+    "sha256": "3bff6a1489b8e54cf130344bc5e8744db331045ad2fc736612576e1d80eb1f48"
+  },
+  {
+    "path": "libraries/platform-3.4.0.jar",
+    "sha1": "e3f70017be8100d3d6923f50b3d2ee17714e9c13",
+    "size": 913436,
+    "url": "https://libraries.minecraft.net/net/java/dev/jna/platform/3.4.0/platform-3.4.0.jar",
+    "sha256": "ea89d5090c8303ba4e9a0056e6d8a20429f3e021411e950bfd9eba3b6e6cf15c"
+  },
+  {
+    "path": "libraries/icu4j-core-mojang-51.2.jar",
+    "sha1": "63d216a9311cca6be337c1e458e587f99d382b84",
+    "size": 1634692,
+    "url": "https://libraries.minecraft.net/com/ibm/icu/icu4j-core-mojang/51.2/icu4j-core-mojang-51.2.jar",
+    "sha256": "147592c5eb8e11fc8394125954f877acf25918bae13aa210c2825aefc3030ed8"
+  },
+  {
+    "path": "libraries/jopt-simple-4.6.jar",
+    "sha1": "306816fb57cf94f108a43c95731b08934dcae15c",
+    "size": 62477,
+    "url": "https://libraries.minecraft.net/net/sf/jopt-simple/jopt-simple/4.6/jopt-simple-4.6.jar",
+    "sha256": "3fcfbe3203c2ea521bf7640484fd35d6303186ea2e08e72f032d640ca067ffda"
+  },
+  {
+    "path": "libraries/codecjorbis-20101023.jar",
+    "sha1": "c73b5636faf089d9f00e8732a829577de25237ee",
+    "size": 103871,
+    "url": "https://libraries.minecraft.net/com/paulscode/codecjorbis/20101023/codecjorbis-20101023.jar",
+    "sha256": "6c4b4e50e608763564afa1bde2d25ece9dd715e7c9129540faa1faded4896506"
+  },
+  {
+    "path": "libraries/codecwav-20101023.jar",
+    "sha1": "12f031cfe88fef5c1dd36c563c0a3a69bd7261da",
+    "size": 5618,
+    "url": "https://libraries.minecraft.net/com/paulscode/codecwav/20101023/codecwav-20101023.jar",
+    "sha256": "bb7d17b340afe6abdfbfdaa03683bce4aef39a64887dbab0636eaff3cf2d59ba"
+  },
+  {
+    "path": "libraries/libraryjavasound-20101123.jar",
+    "sha1": "5c5e304366f75f9eaa2e8cca546a1fb6109348b3",
+    "size": 21679,
+    "url": "https://libraries.minecraft.net/com/paulscode/libraryjavasound/20101123/libraryjavasound-20101123.jar",
+    "sha256": "333bbefeff5eb1722dc9b8d2e26c38bc69c1efa07d0ca870480f29d8858aa336"
+  },
+  {
+    "path": "libraries/librarylwjglopenal-20100824.jar",
+    "sha1": "73e80d0794c39665aec3f62eee88ca91676674ef",
+    "size": 18981,
+    "url": "https://libraries.minecraft.net/com/paulscode/librarylwjglopenal/20100824/librarylwjglopenal-20100824.jar",
+    "sha256": "107d11509f6af59b8c2ba23df828bc5d3c4e067b58f3d858c7deb90ca5308f84"
+  },
+  {
+    "path": "libraries/soundsystem-20120107.jar",
+    "sha1": "419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6",
+    "size": 65020,
+    "url": "https://libraries.minecraft.net/com/paulscode/soundsystem/20120107/soundsystem-20120107.jar",
+    "sha256": "2882d64550240dd0c026724da664d9f97ef205c91d6a85273d10790d88608f34"
+  },
+  {
+    "path": "libraries/netty-all-4.0.23.Final.jar",
+    "sha1": "0294104aaf1781d6a56a07d561e792c5d0c95f45",
+    "size": 1779991,
+    "url": "https://libraries.minecraft.net/io/netty/netty-all/4.0.23.Final/netty-all-4.0.23.Final.jar",
+    "sha256": "50510e9c9874b539b98ef931fe7eeeb002f6b5b1976ea37669b9493426294561"
+  },
+  {
+    "path": "libraries/guava-17.0.jar",
+    "sha1": "9c6ef172e8de35fd8d4d8783e4821e57cdef7445",
+    "size": 2243036,
+    "url": "https://libraries.minecraft.net/com/google/guava/guava/17.0/guava-17.0.jar",
+    "sha256": "8c36a80ea613d0b6b8040a17cf837c5bbe3677bc1b06a058a6c174fdb787ebbc"
+  },
+  {
+    "path": "libraries/commons-lang3-3.3.2.jar",
+    "sha1": "90a3822c38ec8c996e84c16a3477ef632cbc87a3",
+    "size": 412739,
+    "url": "https://libraries.minecraft.net/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar",
+    "sha256": "6b81d10754dadf184d386011486e6509c2cc0c3d33565ced4fb4402b9413d47d"
+  },
+  {
+    "path": "libraries/commons-io-2.4.jar",
+    "sha1": "b1b6ea3b7e4aa4f492509a4952029cd8e48019ad",
+    "size": 185140,
+    "url": "https://libraries.minecraft.net/commons-io/commons-io/2.4/commons-io-2.4.jar",
+    "sha256": "cc6a41dc3eaacc9e440a6bd0d2890b20d36b4ee408fe2d67122f328bb6e01581"
+  },
+  {
+    "path": "libraries/commons-codec-1.9.jar",
+    "sha1": "9ce04e34240f674bc72680f8b843b1457383161a",
+    "size": 263965,
+    "url": "https://libraries.minecraft.net/commons-codec/commons-codec/1.9/commons-codec-1.9.jar",
+    "sha256": "ad19d2601c3abf0b946b5c3a4113e226a8c1e3305e395b90013b78dd94a723ce"
+  },
+  {
+    "path": "libraries/jinput-2.0.5.jar",
+    "sha1": "39c7796b469a600f72380316f6b1f11db6c2c7c4",
+    "size": 208338,
+    "url": "https://libraries.minecraft.net/net/java/jinput/jinput/2.0.5/jinput-2.0.5.jar",
+    "sha256": "79b5a4f5829e1a49a415711f7fb8eb5b9ad22defa72929fda2da96ec30d3f018"
+  },
+  {
+    "path": "libraries/jutils-1.0.0.jar",
+    "sha1": "e12fe1fda814bd348c1579329c86943d2cd3c6a6",
+    "size": 7508,
+    "url": "https://libraries.minecraft.net/net/java/jutils/jutils/1.0.0/jutils-1.0.0.jar",
+    "sha256": "c3334ff39cf0ab3b54925619101054c90098b7c733b1e7834c7b75e4c41e84a5"
+  },
+  {
+    "path": "libraries/gson-2.2.4.jar",
+    "sha1": "a60a5e993c98c864010053cb901b7eab25306568",
+    "size": 190432,
+    "url": "https://libraries.minecraft.net/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar",
+    "sha256": "c0328cd07ca9e363a5acd00c1cf4afe8cf554bd6d373834981ba05cebec687fb"
+  },
+  {
+    "path": "libraries/authlib-1.5.21.jar",
+    "sha1": "aefba0d5b53fbcb70860bc8046ab95d5854c07a5",
+    "size": 64412,
+    "url": "https://libraries.minecraft.net/com/mojang/authlib/1.5.21/authlib-1.5.21.jar",
+    "sha256": "ce7a9c86ebebf30b89929026f4a0a3c58ce0f4d47937d6dc086ae4fd0c77544a"
+  },
+  {
+    "path": "libraries/realms-1.7.59.jar",
+    "sha1": "9c6c59b742d8e038a15f64c1aa273a893a658424",
+    "size": 1198123,
+    "url": "https://libraries.minecraft.net/com/mojang/realms/1.7.59/realms-1.7.59.jar",
+    "sha256": "4a6a90ed956609d6cd3a7f84622fcac87d22e9a5d4858c6d1e965af860d07a63"
+  },
+  {
+    "path": "libraries/commons-compress-1.8.1.jar",
+    "sha1": "a698750c16740fd5b3871425f4cb3bbaa87f529d",
+    "size": 365552,
+    "url": "https://libraries.minecraft.net/org/apache/commons/commons-compress/1.8.1/commons-compress-1.8.1.jar",
+    "sha256": "5fca136503f86ecc6cb61fbd17b137d59e56b45c7a5494e6b8fd3cabd4697fbd"
+  },
+  {
+    "path": "libraries/httpclient-4.3.3.jar",
+    "sha1": "18f4247ff4572a074444572cee34647c43e7c9c7",
+    "size": 589512,
+    "url": "https://libraries.minecraft.net/org/apache/httpcomponents/httpclient/4.3.3/httpclient-4.3.3.jar",
+    "sha256": "9844cc9b5440d65a88d28bcba9d771374d2dfdab898848cda164611091633013"
+  },
+  {
+    "path": "libraries/commons-logging-1.1.3.jar",
+    "sha1": "f6f66e966c70a83ffbdb6f17a0919eaf7c8aca7f",
+    "size": 62050,
+    "url": "https://libraries.minecraft.net/commons-logging/commons-logging/1.1.3/commons-logging-1.1.3.jar",
+    "sha256": "70903f6fc82e9908c8da9f20443f61d90f0870a312642991fe8462a0b9391784"
+  },
+  {
+    "path": "libraries/httpcore-4.3.2.jar",
+    "sha1": "31fbbff1ddbf98f3aa7377c94d33b0447c646b6e",
+    "size": 282269,
+    "url": "https://libraries.minecraft.net/org/apache/httpcomponents/httpcore/4.3.2/httpcore-4.3.2.jar",
+    "sha256": "abd02320e2356f89d054dae4cf02306bef20a9cf7865b3ac94ec7552b4f1528b"
+  },
+  {
+    "path": "libraries/log4j-api-2.0-beta9.jar",
+    "sha1": "1dd66e68cccd907880229f9e2de1314bd13ff785",
+    "size": 108161,
+    "url": "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-api/2.0-beta9/log4j-api-2.0-beta9.jar",
+    "sha256": "eb0ca9bdd938f80711152a758d6bc331a8b0d769199d457294dc67ed03f73498"
+  },
+  {
+    "path": "libraries/log4j-core-2.0-beta9.jar",
+    "sha1": "678861ba1b2e1fccb594bb0ca03114bb05da9695",
+    "size": 681134,
+    "url": "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-core/2.0-beta9/log4j-core-2.0-beta9.jar",
+    "sha256": "dcde6033b205433d6e9855c93740f798951fa3a3f252035a768d9f356fde806d"
+  },
+  {
+    "path": "libraries/lwjgl-2.9.4-nightly-20150209.jar",
+    "sha1": "697517568c68e78ae0b4544145af031c81082dfe",
+    "size": 1047168,
+    "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl/2.9.4-nightly-20150209/lwjgl-2.9.4-nightly-20150209.jar",
+    "sha256": "833e721817f70d1445eec13d8ce5a86e12af70efac5014356302e2bbc68b3fe2"
+  },
+  {
+    "path": "libraries/lwjgl_util-2.9.4-nightly-20150209.jar",
+    "sha1": "d51a7c040a721d13efdfbd34f8b257b2df882ad0",
+    "size": 173887,
+    "url": "https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl_util/2.9.4-nightly-20150209/lwjgl_util-2.9.4-nightly-20150209.jar",
+    "sha256": "034456b132a336b72757325bb7aaf99e075681ee5650d2bea21717bd485de42f"
+  },
+  {
+    "path": "libraries/twitch-6.5.jar",
+    "sha1": "320a2dfd18513a5f41b4e75729df684488cbd925",
+    "size": 55977,
+    "url": "https://libraries.minecraft.net/tv/twitch/twitch/6.5/twitch-6.5.jar",
+    "sha256": "3b90f9f7ad968b9588482e3a09b6e7d0d81c6cf7c214c5cecd8120e3ee509ae9"
+  },
+  {
+    "path": "tooling/asm-9.6.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm/9.6/asm-9.6.jar",
+    "sha256": "3c6fac2424db3d4a853b669f4e3d1d9c3c552235e19a319673f887083c2303a1"
+  },
+  {
+    "path": "tooling/asm-commons-9.6.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm-commons/9.6/asm-commons-9.6.jar",
+    "sha256": "7aefd0d5c0901701c69f7513feda765fb6be33af2ce7aa17c5781fc87657c511"
+  },
+  {
+    "path": "tooling/asm-tree-9.6.jar",
+    "url": "https://repo.maven.apache.org/maven2/org/ow2/asm/asm-tree/9.6/asm-tree-9.6.jar",
+    "sha256": "c43ecf17b539c777e15da7b5b86553b377e2d39a683de6285567d5283888e7ef"
+  }
+]

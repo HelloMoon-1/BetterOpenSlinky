@@ -1,0 +1,29 @@
+# Build output and downloaded dependencies
+/build/
+/dist/
+/run/
+/artifacts/
+/evidence/
+/deps/*.jar
+/deps/libraries/
+/deps/tooling/
+*.download
+
+# Local tools, credentials, editor and runtime state
+/.action-tools*/
+/.claude/
+/.idea/
+/.vscode/
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+*.p12
+*.pfx
+*.log
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+Thumbs.db

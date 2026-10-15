@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -euo pipefail
+script_path=$(readlink -f -- "${BASH_SOURCE[0]}")
+root=$(dirname -- "$script_path")
+if [[ -n "${JAVA_HOME:-}" ]]; then
+    java="$JAVA_HOME/bin/java"
+else
+    java=$(command -v java || true)
+fi
+if [[ -z "$java" || ! -x "$java" ]]; then
+    echo 'Slinky needs a JDK 11 or newer. Set JAVA_HOME to your JDK or add java to PATH.' >&2
+    exit 1
+fi
+version_output=$("$java" -version 2>&1) || { echo 'Could not run Java. Check JAVA_HOME.' >&2; exit 1; }
+version=$(printf '%s\n' "$version_output" | sed -n 's/.*version "\([0-9]*\).*/\1/p' | head -n 1)
+if [[ ! "$version" =~ ^[0-9]+$ || "$version" -lt 11 ]]; then
+    echo 'Slinky needs JDK 11 or newer for its launcher. The game can keep using Java 8.' >&2
+    exit 1
+fi
+if ! "$java" --list-modules 2>/dev/null | grep -Eq '^jdk.attach(@|$)'; then
+    echo 'This Java installation lacks jdk.attach. Use a full JDK 11 or newer.' >&2
+    exit 1
+fi
+# HotSpot's JAR launcher mishandles supplementary Unicode in installation paths.
+# Keep the real payload root, but open its helper JAR through a private ASCII path.
+umask 077
+launcher_temp=$(mktemp -d /tmp/slinky-launcher-XXXXXXXX)
+launcher_copy="$launcher_temp/slinky-launcher.jar"
+cleanup() {
+    rm -f -- "$launcher_copy"
+    rmdir -- "$launcher_temp" 2>/dev/null || true
+}
+trap cleanup EXIT
+cp -- "$root/slinky-launcher.jar" "$launcher_copy"
+chmod 600 -- "$launcher_copy"
+if "$java" --add-modules jdk.attach "-Dslinky.home=$root" -jar "$launcher_copy" "$@"; then
+    exit 0
+else
+    exit "$?"
+fi
